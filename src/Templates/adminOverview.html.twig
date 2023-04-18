@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin-Übersicht{% endblock %}
+
+{% block main %}
+  <section class="content">
+    <h3>Überblick</h3>
+    <table>
+      <tr>
+        <td>Erstis insgesamt</td>
+        <td class="right">{{ numberOfErstis }}</td>
+      </tr>
+
+      {% for courseChoice in courseChoices %}
+        <tr>
+          <td>{{ courseChoice.course }}</td>
+          <td class="right">{{ courseChoice.amount }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h3>Ersti bearbeiten</h3>
+
+    <form id="regform" method="post" action="/admin/edit">
+      <div class="select-wrapper">
+        <select name="ersti_id" style="width:100%;">
+          {% for ersti in erstis %}
+            <option value="{{ ersti.id }}">{{ ersti.lastname }}, {{ ersti.firstname }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div style="margin-top: 4px;">
+        <input type="submit" name="edit" value="Bearbeiten oder Löschen" />
+      </div>
+    </form>
+
+    <h3>Optionen</h3>
+
+    <div>
+      <a href="/admin/toggle_registration">
+        {% if isRegistrationEnabled %}
+          Registrierung deaktivieren
+        {% else %}
+          Registrierung aktivieren
+        {% endif %}
+      </a>
+    </div>
+
+    <h3>Export</h3>
+
+    <div>
+      <a href="/admin/export">Liste mit allen Erstis exportieren</a><br>
+      <a href="/admin/mail_export">E-Mail-Adressen für die Mailingliste exportieren</a>
+    </div>
+  </section>
+{% endblock %}

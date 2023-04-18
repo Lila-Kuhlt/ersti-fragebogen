@@ -1,0 +1,238 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Als Ersti der Lila Pause registrieren{% endblock %}
+
+{% block main %}
+  <section class="content">
+    <form id="regform" method="post" action="{% if meta.mode == 'edit' %}/admin{% endif %}">
+      {% for errorMessage in meta.errorMessages %}
+        <div class="formline error-message">{{ errorMessage }}</div>
+      {% endfor %}
+
+      <div class="formline">
+        <h2>Wer bist du?</h2>
+      </div>
+
+      <input
+        type="hidden"
+        name="ersti_id"
+        value="{{ ersti.id }}"
+      />
+
+      <div class="formline">
+        <label>Vorname*</label>
+        <input
+          type="text"
+          name="firstname"
+          value="{{ ersti.firstname }}"
+          required
+        />
+      </div>
+
+      <div class="formline">
+        <label>Nachname*</label>
+        <input
+          type="text"
+          name="lastname"
+          value="{{ ersti.lastname }}"
+          required
+        />
+      </div>
+
+      <div class="formline">
+        <label>Studiengang</label>
+        <div class="select-wrapper">
+          <select name="course_choice">
+            {% for courseOption in answerOptions.courses %}
+              <option value="{{ courseOption.id }}" {% if ersti.courseChoice == courseOption.id %}selected{% endif %}>
+                {{ courseOption.label }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="formline section-headline">
+        <h2>Wie erreichen wir dich während der O-Phase?</h2>
+      </div>
+
+      <div class="formline">
+        <p>E-Mail-Adresse und Handynummer sind optional, aber sinnvoll, damit wir dich notfalls kontaktieren können. Außerdem kannst du dich über die Mailingliste auch nach der O-Phase mit deinen Kommilitionen und Tutoren austauschen!</p>
+      </div>
+
+      <div class="formline">
+        <label>E-Mail-Adresse</label>
+        <input
+          type="email"
+          name="email"
+          value="{{ ersti.email }}"
+        />
+      </div>
+
+      <div class="formline">
+        <input
+          id="mailing_list_choice"
+          type="checkbox"
+          name="mailing_list_choice"
+          {% if not ersti.id or ersti.mailingChoice %}checked{% endif %}
+        />
+        <label for="mailing_list_choice">Meine E-Mail-Adresse auf die Mailingliste setzen</label>
+      </div>
+
+      <div class="formline">
+        <label>Handynummer</label>
+        <input
+          type="tel"
+          name="phone"
+          value="{{ ersti.phone }}"
+        />
+      </div>
+
+      <div class="formline section-headline">
+        <h2>Hast du einen Schlafplatz?</h2>
+      </div>
+
+      <div class="formline">
+        <p>Einige Veranstaltungen während der O-Phase finden bis spät abends statt. Wenn du hier dabei sein möchtest, aber abends mit Fahrrad oder Bahn nur schwer nach Hause kommst, können wir versuchen, für dich einen Schlafplatz zu organisieren.</p>
+      </div>
+
+      {% for sleepingPlaceOption in answerOptions.sleepingPlace %}
+        <div class="formline">
+          <input
+            type="radio"
+            name="sleeping_choice"
+            value="{{ sleepingPlaceOption.id }}"
+            id="sleeping_choice_{{ sleepingPlaceOption.id }}"
+
+            {% if not ersti.id and sleepingPlaceOption.selected %}
+              checked
+            {% elseif ersti.id and ersti.sleepingPlaceChoice == sleepingPlaceOption.id %}
+              checked
+            {% endif %}
+          >
+
+          <label for="sleeping_choice_{{ sleepingPlaceOption.id }}">
+            <strong>{{ sleepingPlaceOption.label }}</strong><br>
+            {{ sleepingPlaceOption.description }}
+          </label>
+        </div>
+      {% endfor %}
+
+      <div class="formline section-headline">
+        <h2>Bei welchen Veranstaltungen bist du dabei?</h2>
+      </div>
+
+      <div class="formline">
+        <p>Mit diesen Angaben können wir Plätze reservieren und Lebensmittel in sinnvollen Mengen einkaufen. Wochentage und Uhrzeiten der Veranstaltungen kannst du im <a href="https://kuhlt.de#wochenplan" target="_blank" rel="noreferrer noopener">Wochenplan</a> nachschauen.</p>
+      </div>
+
+      <div class="formline">
+        <h3>Lila-Pause-Cocktailfete</h3>
+      </div>
+
+      {% for cocktailPartyOption in answerOptions.cocktailParty %}
+        <div class="formline">
+          <input
+            type="radio"
+            name="cocktail_party_choice"
+            value="{{ cocktailPartyOption.id }}"
+            id="cocktail_party_choice_{{ cocktailPartyOption.id }}"
+
+            {% if not ersti.id and cocktailPartyOption.selected %}
+              checked
+            {% elseif ersti.id and ersti.cocktailPartyChoice == cocktailPartyOption.id %}
+              checked
+            {% endif %}
+          >
+
+          <label for="cocktail_party_choice_{{ cocktailPartyOption.id }}">
+            <strong>{{ cocktailPartyOption.label }}</strong><br>
+            {{ cocktailPartyOption.description }}<br>
+            ({{ cocktailPartyOption.price / 100 }}&nbsp;€)
+          </label>
+        </div>
+      {% endfor %}
+
+      <div class="formline">
+        <h3>SCC-Führung</h3>
+      </div>
+
+      <div class="formline">
+        <input
+          id="scc_tour_choice"
+          type="checkbox"
+          name="scc_tour_choice"
+          {% if not ersti.id or ersti.sccTourChoice %}checked{% endif %}
+        />
+        <label for="scc_tour_choice">Bitte reserviert mir einen Platz für eine Führung durch das&nbsp;Rechenzentrum des&nbsp;KIT. Die Anzahl der Plätze ist auf 38 limitiert.</label>
+      </div>
+
+      <div class="formline">
+        <h3>Friday Special</h3>
+      </div>
+
+      {% for fridaySpecialOption in answerOptions.fridaySpecial %}
+        <div class="formline">
+          <input
+            type="radio"
+            name="friday_special_choice"
+            value="{{ fridaySpecialOption.id }}"
+            id="friday_special_choice_{{ fridaySpecialOption.id }}"
+
+            {% if not ersti.id and fridaySpecialOption.selected %}
+              checked
+            {% elseif ersti.id and ersti.fridaySpecialChoice == fridaySpecialOption.id %}
+              checked
+            {% endif %}
+          >
+
+          <label for="friday_special_choice_{{ fridaySpecialOption.id }}">
+            <strong>{{ fridaySpecialOption.label }}</strong><br>
+            {{ fridaySpecialOption.description }}{% if fridaySpecialOption.price > 0 %}<br>{% endif %}
+            {% if fridaySpecialOption.price > 0 %}({{ fridaySpecialOption.price / 100 }}&nbsp;€){% endif %}
+          </label>
+        </div>
+      {% endfor %}
+
+      <div class="formline section-headline">
+        <h2>Möchtest du ein T-Shirt?</h2>
+      </div>
+
+      <div class="formline">
+        <p>Das Lila Pause T-Shirt wird dich immer an die O-Phase erinnern!</p>
+      </div>
+
+      <div class="formline">
+        <label>Lila Pause T-Shirt</label>
+        <div class="select-wrapper">
+          <select name="tshirt_choice">
+            {% for tshirtOption in answerOptions.tshirt %}
+              <option value="{{ tshirtOption.id }}" {% if ersti.tshirtChoice == tshirtOption.id %}selected{% endif %}>
+                {{ tshirtOption.label }}
+                {% if tshirtOption.price > 0 %}({{ tshirtOption.price / 100 }}&nbsp;€){% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="formline section-headline">
+        <h2>Du hast es fast geschafft!</h2>
+      </div>
+
+      <div class="formline">Wer hat Zugriff auf diese Daten? Was passiert damit und wann werden sie wieder gelöscht? Das erfährst du in unserer <a href="/privacy" target="_blank">Datenschutzerkärung</a>.</div>
+
+      <div class="formline">
+        <input
+          type="submit"
+          name="ersti_form"
+          value="{% if meta.mode == 'edit' %}Änderungen speichern{% else %}Einverstanden, jetzt absenden{% endif %}"
+        />
+
+        {% if meta.mode == 'edit' %}
+          <input type="submit" name="ersti_form_delete" value="Ersti-Datensatz löschen" />
+        {% endif %}
+      </div>
+    </form>
+  </section>
+{% endblock %}

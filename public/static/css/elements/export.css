@@ -1,0 +1,20 @@
+body.export table {
+	max-width: 100%;
+	border-collapse: collapse;
+}
+
+body.export table + * {
+	margin-top: 20px;
+}
+
+body.export tr {
+  page-break-inside: avoid;
+}
+
+body.export td,
+body.export th {
+	border: 1px solid #333333;
+	text-align: left;
+	padding: .5em .5em .5em .2em;
+  page-break-inside: avoid;
+}

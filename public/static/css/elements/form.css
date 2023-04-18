@@ -1,0 +1,186 @@
+.formline {
+  position: relative;
+	margin-top: 30px;
+}
+
+.section-headline {
+  margin-top: 60px;
+}
+
+.error-message {
+  padding: 20px;
+  background-color: var(--color-error);
+  color: var(--color-text-inverted);
+}
+
+.error-message + .error-message {
+  margin-top: 10px;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+}
+
+input,
+select,
+textarea {
+	padding: 8px 12px 6px;
+	border: none;
+	border: 1px solid var(--color-primary);
+	background-color: transparent;
+	color: var(--color-text);
+  font-family: var(--font-family-main);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	transition: background-color .2s, color .2s;
+}
+
+textarea {
+	width: 100%;
+	resize: vertical;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+select {
+	width: 100%;
+}
+
+input[type='submit'],
+select {
+	cursor: pointer;
+}
+
+input[type='submit'] {
+	background-color: var(--color-primary);
+	color: var(--color-background);
+  transition: transform .2s;
+}
+
+input[type='submit']:hover {
+  transform: scale(1.05);
+}
+
+label + input,
+label + select,
+label + textarea,
+label + .select-wrapper {
+	display: block;
+	margin-top: 8px;
+}
+
+.select-wrapper {
+	position: relative;
+}
+
+.select-wrapper::after {
+	content: '›';
+	position: absolute;
+	right: 16px;
+	top: 6px;
+	transform: rotate(90deg);
+  pointer-events: none;
+}
+
+input[type='checkbox'] {
+	content: '✓';
+	position: absolute;
+	top: 2px;
+	left: 0;
+	width: 1rem;
+	height: 1rem;
+	padding-left: 1px;
+	line-height: 1rem;
+	color: transparent;
+	border: 1px solid var(--color-primary);
+  appearance: none;
+}
+
+input[type='checkbox'] + label {
+	position: relative;
+	padding-left: 24px;
+  font-weight: normal;
+	cursor: pointer;
+}
+
+input[type='checkbox'] + label::before {
+  content: '✓';
+	position: absolute;
+	top: 2px;
+	left: 1px;
+	width: 1rem;
+	height: 1rem;
+	padding-left: 1px;
+	line-height: 1rem;
+	color: transparent;
+	transition: color .2s;
+}
+
+input[type='checkbox']:checked + label::before {
+	color: var(--color-primary);
+}
+
+input[type='checkbox']:not(:checked):hover + label::before {
+  color: var(--color-grey);
+}
+
+input[type='radio'] {
+  position: absolute;
+	top: 2px;
+	left: 0;
+	width: 1rem;
+	height: 1rem;
+	padding-left: 1px;
+	line-height: 1rem;
+	color: transparent;
+	border: 1px solid var(--color-primary);
+  border-radius: 50%;
+}
+
+input[type='radio'] + label {
+  position: relative;
+	padding-left: 24px;
+  font-weight: normal;
+	cursor: pointer;
+}
+
+input[type='radio'] + label::before {
+	content: '✓';
+	position: absolute;
+	top: 3px;
+	left: 2px;
+	line-height: 1rem;
+	color: transparent;
+	transition: color .2s;
+}
+
+input[type='radio']:checked + label::before {
+	color: var(--color-primary);
+}
+
+input[type='radio']:not(:checked):hover + label::before {
+  color: var(--color-grey);
+}
+
+input[type='radio'] + label + input[type='radio'] + label {
+  margin-top: 10px;
+}
+
+#subscribe_list + label {
+	display: inline-block;
+}
+
+@media (min-width: 1025px) {
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+
+  .select-wrapper::after {
+    top: 9px;
+  }
+}

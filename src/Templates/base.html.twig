@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %} | Kuhlt – Lila Pause</title>
+  <link rel="stylesheet" href="/static/css/main.css?version=1665952480">
+</head>
+<body class="{% block bodyclasses %}{% endblock %}">
+  <header>
+    <h1><a href="/">Lila Pause</a></h1>
+  </header>
+
+  <main>
+    {% block main %}{% endblock %}
+  </main>
+
+  <footer>
+    <a href="https://kuhlt.de" target="_blank" rel="noreferrer noopener">kuhlt.de</a>
+    <a href="https://o-phase.com" target="_blank" rel="noreferrer noopener">o-phase.com</a>
+  </footer>
+</body>
+</html>

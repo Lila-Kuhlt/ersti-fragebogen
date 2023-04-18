@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Datenschutzerklärung{% endblock %}
+
+{% block main %}
+  <section class="content">
+    <h2>Datenschutzerkärung</h2>
+
+    <p><strong>Was passiert mit den Angaben, die ich im Ersti-Fragebogen mache?</strong><br>Wenn du auf „Senden“ klickst, werden deine hier gemachten Angaben verschlüsselt an eine Datenbank auf dem Webserver von Pascal Wittler, gehostet bei der Firma 1&1 in Deutschland, gesendet und dort bis spätestens zwei Wochen nach Ende der O-Phase gespeichert.</p>
+
+    <p><strong>Wer hat Zugriff auf meine Daten und warum?</strong><br>Zugriff haben alle Tutoren der Lila Pause und deine Daten werden verwendet, um dich erreichen zu können (Name, E-Mail-Adresse) und deine Wünsche für Veranstaltungen und Einkäufe (Getränkewahl, T-Shirt-Größe) während der O-Phase zu berücksichtigen.</p>
+
+    <p><strong>Was bedeutet „auf Mailingliste setzen“?</strong><br>Wenn du dieses Häkchen setzt, wird deine E-Mail-Adresse in den Verteiler der Mailingliste <em>lilapause-<?php echo date('Y'); ?>@lists.kit.edu</em> aufgenommen. Du kannst dich jederzeit davon abmelden. Weitere Informationen hierzu findest du <a href="https://www.lists.kit.edu/static-sympa/Datenschutz_KIT-Mailinglisten.html" target="_blank">hier</a>.</p>
+
+    <p><strong>Was sind meine Rechte?</strong><br>Nach DSGVO und BDSG kannst du jederzeit Auskunft, Aktualisierung, Sperrung oder Löschung aller deiner Daten von uns verlangen. Dein Ansprechpartner hierfür ist Elias Schaut. Außerdem sind wir verpflichtet, dich an dein Recht zu erinnern, dieser Zustimmung jederzeit zu widersprechen und dich ggf. bei einer Aufsichtsbehörde über uns zu beschweren ;-)</p>
+  </section>
+{% endblock %}

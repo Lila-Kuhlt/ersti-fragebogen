@@ -1,0 +1,22 @@
+body:not(.export) table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+body:not(.export) table td,
+body:not(.export) table th {
+  padding-top: .5em;
+  padding-bottom: .5em;
+	border-top: 1px var(--color-grey) solid;
+	border-bottom: 1px var(--color-grey) solid;
+  page-break-inside: avoid;
+}
+
+body:not(.export) table td.right,
+body:not(.export) table th.right {
+	text-align: right;
+}
+
+body:not(.export) * + h3 {
+	margin-top: 2rem;
+}

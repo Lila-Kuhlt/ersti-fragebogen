@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyclasses %}export{% endblock %}
+
+{% block title %}Export{% endblock %}
+
+{% block main %}
+  <section class="export">
+    <h2>Ersti-Daten und Bezahlung</h2>
+
+    <table>
+      <tr>
+          <th>Nachname</th>
+          <th>Vorname</th>
+          <th>Studiengang</th>
+          <th>E-Mail-Adresse</th>
+          <th>Handynummer</th>
+          <th>Schlafplatz</th>
+          <th>Cocktail-Party</th>
+          <th>SCC-Führung</th>
+          <th>Friday Special</th>
+          <th>T-Shirt</th>
+          <th>€</th>
+          <th>Bezahlt</th>
+          <th>Cocktail-Bändchen bekommen?</th>
+          <th>T-Shirt erhalten?</th>
+      </tr>
+
+      {% for ersti in erstis %}
+        <tr>
+          <td>{{ ersti.lastname }}</td>
+          <td>{{ ersti.firstname }}</td>
+          <td>{{ ersti.courseChoice.label }}</td>
+          <td>{{ ersti.email }}</td>
+          <td>{{ ersti.phone }}</td>
+          <td>{% if ersti.sleepingChoice.id != 0 %}{{ ersti.sleepingChoice.label }}{% endif %}</td>
+          <td>{% if ersti.cocktailPartyChoice.id != 0 %}{{ ersti.cocktailPartyChoice.label }}{% endif %}</td>
+          <td>{% if ersti.sccTourChoice %}X{% endif %}</td>
+          <td>{% if ersti.fridaySpecialChoice.id %}{{ ersti.fridaySpecialChoice.label }}{% endif %}</td>
+          <td>{% if ersti.tshirtChoice.id %}{{ ersti.tshirtChoice.label }}{% endif %}</td>
+          <td>{{ ersti.sumToPay / 100 }}</td>
+          <td>{% if not ersti.sumToPay %}–{% endif %}</td>
+          <td>{% if not ersti.cocktailPartyChoice.id %}–{% endif %}</td>
+          <td>{% if ersti.tshirtChoice.id == 0 %}–{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h2>T-Shirts</h2>
+
+    <table>
+      <tr>
+        <th>T-Shirt-Größe</th>
+        <th>Anzahl</th>
+      </tr>
+
+      {% for tshirtOption in tshirts %}
+        <tr>
+          <td>{{ tshirtOption.label }}</td>
+          <td>{{ tshirtOption.amount }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h2>Cocktailfete</h2>
+
+    <table>
+      <tr>
+          <th>Getränkewahl</th>
+          <th>Anzahl</th>
+      </tr>
+
+      {% for cocktailChoice in cocktails %}
+        <tr>
+          <td>{{ cocktailChoice.label }}</td>
+          <td>{{ cocktailChoice.amount }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h2>Veranstaltungen</h2>
+
+    <table>
+      <tr>
+          <th>Veranstaltung</th>
+          <th>Anzahl</th>
+      </tr>
+
+      {% for event in events %}
+        <tr>
+          <td>{{ event.label }}</td>
+          <td>{{ event.amount }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </section>
+{% endblock %}

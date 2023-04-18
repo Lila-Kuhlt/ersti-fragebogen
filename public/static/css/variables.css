@@ -1,0 +1,11 @@
+html {
+  --color-primary: #800080;
+  --color-background: #ffffff;
+  --color-error: #660000;
+  --color-text: #333333;
+  --color-text-inverted: #ffffff;
+  --color-grey: #cccccc;
+
+  --font-family-main: 'Fira Sans', sans-serif;
+  --font-family-special: 'Lila Pause', sans-serif;
+}
